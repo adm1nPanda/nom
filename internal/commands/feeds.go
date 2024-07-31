@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"sort"
 	"sync"
 
 	"github.com/guyfedwards/nom/v2/internal/config"
@@ -92,6 +93,11 @@ func defaultView(items []store.Item) (is []store.Item) {
 			is = append(is, v)
 		}
 	}
+
+	//sort decending by default
+	sort.Slice(is, func(i, j int) bool {
+		return is[i].PublishedAt.After(is[j].PublishedAt)
+	})
 
 	return is
 }
