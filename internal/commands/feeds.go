@@ -94,7 +94,7 @@ func defaultView(items []store.Item) (is []store.Item) {
 		}
 	}
 
-	//sort decending by default
+	//sort newest first by default
 	sort.Slice(is, func(i, j int) bool {
 		return is[i].PublishedAt.After(is[j].PublishedAt)
 	})

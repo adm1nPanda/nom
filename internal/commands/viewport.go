@@ -32,6 +32,14 @@ func updateViewport(msg tea.Msg, m model) (tea.Model, tea.Cmd) {
 			cmd = m.commands.OpenLink(current.URL)
 			cmds = append(cmds, cmd)
 
+		case key.Matches(msg, ViewportKeyMap.Favourite):
+			current := m.list.Index()
+			err := m.commands.store.ToggleFavourite(current + 1)
+			if err != nil {
+				return m, nil
+			}
+			m.UpdateList()
+
 		case key.Matches(msg, ViewportKeyMap.Prev):
 			current := m.list.Index()
 			if current-1 < 0 {
